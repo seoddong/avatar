@@ -40,6 +40,13 @@ public class Avatar {
     }
 
     //<<< Clean Arch / Port Method
+    public void createAvatar() {
+        //implement business logic here:
+
+    }
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void intoBattlefield() {
         //implement business logic here:
 

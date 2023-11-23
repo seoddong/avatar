@@ -13,6 +13,9 @@ public class AvatarHateoasProcessor
     @Override
     public EntityModel<Avatar> process(EntityModel<Avatar> model) {
         model.add(
+            Link.of(model.getRequiredLink("self").getHref() + "/").withRel("")
+        );
+        model.add(
             Link
                 .of(
                     model.getRequiredLink("self").getHref() + "/intobattlefield"
