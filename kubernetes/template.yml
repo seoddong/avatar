@@ -1,0 +1,171 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avatar
+  labels:
+    app: avatar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: avatar
+  template:
+    metadata:
+      labels:
+        app: avatar
+    spec:
+      containers:
+        - name: avatar
+          image: username/avatar:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monster
+  labels:
+    app: monster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monster
+  template:
+    metadata:
+      labels:
+        app: monster
+    spec:
+      containers:
+        - name: monster
+          image: username/monster:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: battle
+  labels:
+    app: battle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: battle
+  template:
+    metadata:
+      labels:
+        app: battle
+    spec:
+      containers:
+        - name: battle
+          image: username/battle:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: avatar
+  labels:
+    app: avatar
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: avatar
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: monster
+  labels:
+    app: monster
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: monster
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: battle
+  labels:
+    app: battle
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: battle
+
